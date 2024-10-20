@@ -3,7 +3,13 @@ from django.db import migrations
 
 def copy_data_to_profiles(apps, schema_editor):
     # Get the old and new Profile models
-    OldProfile = apps.get_model('oc_lettings_site', 'Profile')
+    # Supposons que le modèle OldProfile n'existe plus dans 'oc_lettings_site'
+    try:
+        OldProfile = apps.get_model('oc_lettings_site', 'Profile')
+    except LookupError:
+        # Si le modèle n'existe plus, arrêtez la migration
+        return
+    
     NewProfile = apps.get_model('profiles', 'Profile')
     User = apps.get_model('auth', 'User')
 
