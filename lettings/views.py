@@ -1,6 +1,7 @@
 import logging
 from django.shortcuts import render
 from .models import Letting
+from django.http import HttpResponseNotFound
 
 
 # Configuration du logger
@@ -33,6 +34,6 @@ def letting(request, letting_id):
         }
     except Letting.DoesNotExist:
         logger.error(f"Letting with ID {letting_id} does not exist.")
-        return render(request, '404.html')
+        return HttpResponseNotFound(render(request, '404.html'))
 
     return render(request, 'lettings/letting.html', context)

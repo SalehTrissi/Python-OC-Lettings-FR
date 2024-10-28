@@ -1,6 +1,7 @@
 import logging
 from django.shortcuts import render
 from .models import Profile
+from django.http import HttpResponseNotFound
 
 
 # Configuration du logger
@@ -40,6 +41,6 @@ def profile(request, username):
         context = {'profile': profile}
     except Profile.DoesNotExist:
         logger.error(f"Profile for username {username} does not exist.")
-        return render(request, '404.html')
+        return HttpResponseNotFound(request, '404.html')
 
     return render(request, 'profiles/profile.html', context)

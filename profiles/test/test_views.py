@@ -45,3 +45,11 @@ class ProfilesViewsTest(TestCase):
         """
         response = self.client.get(reverse('profiles:profile', args=['Trissi']))
         self.assertContains(response, 'Paris')
+
+    def test_profile_view_nonexistent_user(self):
+        """
+        Teste le comportement de la vue profile lorsqu'un utilisateur inexistant est fourni.
+        Devrait retourner une page 404.
+        """
+        response = self.client.get(reverse('profiles:profile', args=['nonexistent_user']))
+        self.assertEqual(response.status_code, 404)

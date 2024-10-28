@@ -51,3 +51,11 @@ class LettingsViewsTest(TestCase):
         self.assertContains(response, '150 Boulverad MAcdonald')
         self.assertContains(response, 'Paris, PA 75019')
         self.assertContains(response, 'FR')
+
+    def test_letting_view_nonexistent(self):
+        """
+        Teste le comportement de la vue letting lorsqu'un ID inexistant est fourni.
+        Devrait retourner une page 404.
+        """
+        response = self.client.get(reverse('lettings:letting', args=[999]))
+        self.assertEqual(response.status_code, 404)
