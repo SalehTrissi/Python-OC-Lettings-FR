@@ -75,3 +75,64 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 
 - Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1` 
 - Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`
+
+---
+
+## 🚀 Déploiement
+
+### 1. Récapitulatif du Déploiement
+
+Le déploiement de ce projet est automatisé grâce à **GitHub Actions** et à un webhook de déploiement fourni par **Render**. Lorsque les tests et l’analyse de code sont réussis, le pipeline CI/CD :
+1. Construit une image Docker,
+2. La pousse vers **Docker Hub**,
+3. Déclenche un déploiement sur Render.
+
+Ainsi, chaque mise à jour sur les branches `main` ou `master` est déployée après une validation complète du code.
+
+### 2. Configuration Requise
+
+Pour que le déploiement fonctionne correctement, assurez-vous de disposer des éléments suivants :
+
+- **Secrets GitHub** configurés :
+  - `DOCKERHUB_USERNAME` et `DOCKERHUB_TOKEN` : pour l’authentification Docker Hub.
+  - `RENDER_DEPLOY_HOOK_URL` : pour déclencher le déploiement via Render.
+
+- **Compte Docker Hub** : avec un dépôt configuré pour héberger l’image Docker.
+- **Compte Render** : avec un service configuré pour exécuter l’application à partir d’un conteneur Docker.
+
+### 3. Étapes de Déploiement
+
+#### Préparation
+
+1. **Créer et configurer les secrets GitHub** :
+   - Accédez aux **Paramètres** du dépôt GitHub, puis à **Secrets et variables > Actions**.
+   - Ajoutez les secrets suivants :
+     - **DOCKERHUB_USERNAME** : votre nom d’utilisateur Docker Hub.
+     - **DOCKERHUB_TOKEN** : un token d’accès généré dans Docker Hub (via `Compte > Paramètres > Sécurité`).
+     - **RENDER_DEPLOY_HOOK_URL** : l’URL du hook de déploiement Render (disponible dans les paramètres du service Render sous *Deploy Hook*).
+
+2. **Configurer Docker Hub** :
+   - Créez un dépôt (public ou privé) sur Docker Hub nommé `oc-lettings-site`.
+   - Ce dépôt recevra les images Docker automatiquement poussées par le workflow GitHub Actions.
+
+3. **Configurer Render** :
+   - Créez un service Render basé sur une image Docker.
+   - Configurez le service pour utiliser l’image de Docker Hub : `DOCKERHUB_USERNAME/oc-lettings-site`.
+   - Copiez l’URL du *Deploy Hook* depuis les paramètres du service Render pour l’ajouter comme secret dans GitHub.
+
+#### Déploiement Automatique
+
+1. **Déclenchement** :
+   - Le déploiement est automatiquement déclenché pour les *pushes* sur les branches `main` ou `master`.
+   - Les étapes du workflow incluent la construction de l’image, le linting, les tests, la vérification de la couverture de test, le push de l'image vers Docker Hub, puis le déclenchement du déploiement via le webhook Render.
+
+2. **Vérification du Déploiement** :
+   - Render lance automatiquement le déploiement à la suite du webhook.
+   - Une fois le déploiement terminé, le service est accessible à l’URL configurée sur Render.
+
+### ⚙️ Instructions Additionnelles
+
+- Pour des modifications sur les branches de déploiement (`main` ou `master`), assurez-vous que toutes les étapes CI/CD se valident avant le déploiement.
+- En cas de modification d’un secret (ex. : renouvellement de token), mettez à jour le secret correspondant dans GitHub pour garantir un déploiement continu et sans interruption.
+
+---
