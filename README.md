@@ -1,138 +1,200 @@
-## Résumé
+# Orange County Lettings
 
-Site web d'Orange County Lettings
+Ce document décrit les étapes pour le développement local et le déploiement de l'application **Orange County Lettings**.
 
-## Développement local
+---
+
+## ⚙️ Développement Local
 
 ### Prérequis
 
-- Compte GitHub avec accès en lecture à ce repository
-- Git CLI
-- SQLite3 CLI
-- Interpréteur Python, version 3.6 ou supérieure
+Pour configurer l'environnement de développement, assurez-vous de disposer des éléments suivants :
 
-Dans le reste de la documentation sur le développement local, il est supposé que la commande `python` de votre OS shell exécute l'interpréteur Python ci-dessus (à moins qu'un environnement virtuel ne soit activé).
+- Compte GitHub avec accès en lecture au dépôt de ce projet.
+- **Git CLI** pour gérer le code source.
+- **SQLite3 CLI** pour interagir avec la base de données.
+- **Python 3.6 ou supérieur**.
 
-### macOS / Linux
+**Note** : Il est supposé que la commande `python` de votre shell exécute l'interpréteur Python approprié. Sinon, activez un environnement virtuel pour garantir l'usage de la version correcte.
 
-#### Cloner le repository
+### Installation et Configuration
 
-- `cd /path/to/put/project/in`
-- `git clone https://github.com/OpenClassrooms-Student-Center/Python-OC-Lettings-FR.git`
+#### macOS / Linux
 
-#### Créer l'environnement virtuel
+1. **Cloner le dépôt :**
+   ```bash
+   cd /path/to/your/project
+   git clone https://github.com/OpenClassrooms-Student-Center/Python-OC-Lettings-FR.git
+   ```
+   OR
+    ```bash
+   git clone https://github.com/SalehTrissi/Python-OC-Lettings-FR.git
+   ```
 
-- `cd /path/to/Python-OC-Lettings-FR`
-- `python -m venv venv`
-- `apt-get install python3-venv` (Si l'étape précédente comporte des erreurs avec un paquet non trouvé sur Ubuntu)
-- Activer l'environnement `source venv/bin/activate`
-- Confirmer que la commande `python` exécute l'interpréteur Python dans l'environnement virtuel
-`which python`
-- Confirmer que la version de l'interpréteur Python est la version 3.6 ou supérieure `python --version`
-- Confirmer que la commande `pip` exécute l'exécutable pip dans l'environnement virtuel, `which pip`
-- Pour désactiver l'environnement, `deactivate`
+2. **Créer un environnement virtuel :**
+   ```bash
+   cd Python-OC-Lettings-FR
+   python -m venv venv
+   ```
+   Si vous rencontrez des erreurs sous Ubuntu, installez le package :
+   ```bash
+   sudo apt-get install python3-venv
+   ```
 
-#### Exécuter le site
+3. **Activer l'environnement virtuel :**
+   ```bash
+   source venv/bin/activate
+   ```
 
-- `cd /path/to/Python-OC-Lettings-FR`
-- `source venv/bin/activate`
-- `pip install --requirement requirements.txt`
-- `python manage.py runserver`
-- Aller sur `http://localhost:8000` dans un navigateur.
-- Confirmer que le site fonctionne et qu'il est possible de naviguer (vous devriez voir plusieurs profils et locations).
+4. **Vérifier l'environnement :**
+   - Confirmez que `python` pointe vers la version de l'environnement virtuel :
+     ```bash
+     which python
+     ```
+   - Confirmez la version Python (3.6 ou supérieure) :
+     ```bash
+     python --version
+     ```
+   - Confirmez que `pip` est dans l'environnement virtuel :
+     ```bash
+     which pip
+     ```
 
-#### Linting
+5. **Désactiver l'environnement virtuel :**
+   ```bash
+   deactivate
+   ```
 
-- `cd /path/to/Python-OC-Lettings-FR`
-- `source venv/bin/activate`
-- `flake8`
+#### Exécuter le Site
 
-#### Tests unitaires
+1. **Installer les dépendances :**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-- `cd /path/to/Python-OC-Lettings-FR`
-- `source venv/bin/activate`
-- `pytest`
+2. **Lancer le serveur :**
+   ```bash
+   python manage.py runserver
+   ```
+   Accédez à l'URL [http://localhost:8000](http://localhost:8000) pour vérifier le bon fonctionnement du site.
 
-#### Base de données
+#### Linting et Tests
 
-- `cd /path/to/Python-OC-Lettings-FR`
-- Ouvrir une session shell `sqlite3`
-- Se connecter à la base de données `.open oc-lettings-site.sqlite3`
-- Afficher les tables dans la base de données `.tables`
-- Afficher les colonnes dans le tableau des profils, `pragma table_info(Python-OC-Lettings-FR_profile);`
-- Lancer une requête sur la table des profils, `select user_id, favorite_city from
-  Python-OC-Lettings-FR_profile where favorite_city like 'B%';`
-- `.quit` pour quitter
+- **Exécuter l'analyse statique avec Flake8 :**
+  ```bash
+  flake8
+  ```
+- **Lancer les tests unitaires :**
+  ```bash
+  pytest
+  ```
 
-#### Panel d'administration
+#### Gestion de la Base de Données
 
-- Aller sur `http://localhost:8000/admin`
-- Connectez-vous avec l'utilisateur `admin`, mot de passe `Abc1234!`
+1. **Ouvrir une session SQLite :**
+   ```bash
+   sqlite3
+   ```
+2. **Se connecter à la base de données :**
+   ```sqlite
+   .open oc-lettings-site.sqlite3
+   ```
+3. **Afficher les tables :**
+   ```sqlite
+   .tables
+   ```
+4. **Examiner la table des profils :**
+   ```sqlite
+   pragma table_info(Python-OC-Lettings-FR_profile);
+   ```
+5. **Lancer une requête d'exemple :**
+   ```sqlite
+   select user_id, favorite_city from Python-OC-Lettings-FR_profile where favorite_city like 'B%';
+   ```
+6. **Quitter SQLite :**
+   ```sqlite
+   .quit
+   ```
 
-### Windows
+#### Accéder au Panel d'Administration
 
-Utilisation de PowerShell, comme ci-dessus sauf :
+- Connectez-vous sur [http://localhost:8000/admin](http://localhost:8000/admin) avec les identifiants :
+  - **Utilisateur** : `admin`
+  - **Mot de passe** : `Abc1234!`
 
-- Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1` 
-- Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`
+### Guide pour Windows
+
+Utilisez **PowerShell** avec les adaptations suivantes :
+
+- Activation de l'environnement virtuel :
+  ```powershell
+  .\venv\Scripts\Activate.ps1
+  ```
+- Remplacez `which <commande>` par :
+  ```powershell
+  (Get-Command <commande>).Path
+  ```
 
 ---
 
 ## 🚀 Déploiement
 
-### 1. Récapitulatif du Déploiement
+### Aperçu du Déploiement
 
-Le déploiement de ce projet est automatisé grâce à **GitHub Actions** et à un webhook de déploiement fourni par **Render**. Lorsque les tests et l’analyse de code sont réussis, le pipeline CI/CD :
-1. Construit une image Docker,
-2. La pousse vers **Docker Hub**,
-3. Déclenche un déploiement sur Render.
+Ce projet utilise un pipeline **CI/CD** géré par **GitHub Actions** et **Render** pour un déploiement automatisé. Une fois les tests et l’analyse de code validés, le processus de déploiement suit les étapes ci-dessous :
 
-Ainsi, chaque mise à jour sur les branches `main` ou `master` est déployée après une validation complète du code.
+1. Construction de l’image Docker.
+2. Publication de l’image sur **Docker Hub**.
+3. Déclenchement du déploiement via le webhook de **Render**.
 
-### 2. Configuration Requise
+Ainsi, chaque modification poussée sur les branches `main` ou `master` déclenche un déploiement après validation.
 
-Pour que le déploiement fonctionne correctement, assurez-vous de disposer des éléments suivants :
+### Configuration Requise
 
-- **Secrets GitHub** configurés :
-  - `DOCKERHUB_USERNAME` et `DOCKERHUB_TOKEN` : pour l’authentification Docker Hub.
-  - `RENDER_DEPLOY_HOOK_URL` : pour déclencher le déploiement via Render.
+Assurez-vous d’avoir les éléments suivants pour garantir le bon fonctionnement du déploiement :
 
-- **Compte Docker Hub** : avec un dépôt configuré pour héberger l’image Docker.
-- **Compte Render** : avec un service configuré pour exécuter l’application à partir d’un conteneur Docker.
+- Secrets GitHub configurés :
+  - **DOCKERHUB_USERNAME** et **DOCKERHUB_TOKEN** : pour l'authentification sur Docker Hub.
+  - **RENDER_DEPLOY_HOOK_URL** : pour déclencher le déploiement sur Render.
+- Compte **Docker Hub** avec un dépôt configuré (`oc-lettings-site`).
+- Compte **Render** avec un service configuré pour exécuter l’application.
 
-### 3. Étapes de Déploiement
+### Étapes de Déploiement
 
-#### Préparation
+#### Préparation des Secrets GitHub
 
-1. **Créer et configurer les secrets GitHub** :
-   - Accédez aux **Paramètres** du dépôt GitHub, puis à **Secrets et variables > Actions**.
+1. **Créer les secrets** :
+   - Allez dans **Paramètres > Secrets et variables > Actions** du dépôt GitHub.
    - Ajoutez les secrets suivants :
      - **DOCKERHUB_USERNAME** : votre nom d’utilisateur Docker Hub.
-     - **DOCKERHUB_TOKEN** : un token d’accès généré dans Docker Hub (via `Compte > Paramètres > Sécurité`).
-     - **RENDER_DEPLOY_HOOK_URL** : l’URL du hook de déploiement Render (disponible dans les paramètres du service Render sous *Deploy Hook*).
+     - **DOCKERHUB_TOKEN** : un token d’accès Docker Hub.
+     - **RENDER_DEPLOY_HOOK_URL** : l’URL du webhook Render.
 
-2. **Configurer Docker Hub** :
-   - Créez un dépôt (public ou privé) sur Docker Hub nommé `oc-lettings-site`.
-   - Ce dépôt recevra les images Docker automatiquement poussées par le workflow GitHub Actions.
+#### Configurer Docker Hub
 
-3. **Configurer Render** :
-   - Créez un service Render basé sur une image Docker.
-   - Configurez le service pour utiliser l’image de Docker Hub : `DOCKERHUB_USERNAME/oc-lettings-site`.
-   - Copiez l’URL du *Deploy Hook* depuis les paramètres du service Render pour l’ajouter comme secret dans GitHub.
+1. Créez un dépôt `oc-lettings-site` (public ou privé) pour héberger les images Docker.
+2. Ce dépôt recevra automatiquement les images poussées par GitHub Actions.
 
-#### Déploiement Automatique
+#### Configurer Render
+
+1. Créez un service Render pour exécuter l’application à partir d’une image Docker.
+2. Configurez le service pour utiliser l’image Docker Hub : `DOCKERHUB_USERNAME/oc-lettings-site`.
+3. Récupérez l’URL du **Deploy Hook** pour l’ajouter aux secrets GitHub.
+
+### Déploiement Automatique
 
 1. **Déclenchement** :
-   - Le déploiement est automatiquement déclenché pour les *pushes* sur les branches `main` ou `master`.
-   - Les étapes du workflow incluent la construction de l’image, le linting, les tests, la vérification de la couverture de test, le push de l'image vers Docker Hub, puis le déclenchement du déploiement via le webhook Render.
+   - Les *pushes* sur les branches `main` ou `master` déclenchent automatiquement le déploiement.
+   - Le pipeline effectue le linting, les tests, la vérification de la couverture, la publication sur Docker Hub, puis le déploiement via Render.
 
-2. **Vérification du Déploiement** :
-   - Render lance automatiquement le déploiement à la suite du webhook.
-   - Une fois le déploiement terminé, le service est accessible à l’URL configurée sur Render.
-
-### ⚙️ Instructions Additionnelles
-
-- Pour des modifications sur les branches de déploiement (`main` ou `master`), assurez-vous que toutes les étapes CI/CD se valident avant le déploiement.
-- En cas de modification d’un secret (ex. : renouvellement de token), mettez à jour le secret correspondant dans GitHub pour garantir un déploiement continu et sans interruption.
+2. **Vérification** :
+   - Une fois le déploiement terminé, accédez au service via l’URL configurée dans Render.
 
 ---
+
+## 📝 Remarques
+
+- Toute modification des branches `main` ou `master` est automatiquement déployée.
+- Si un secret est modifié (par exemple, le token Docker), mettez-le à jour dans GitHub pour éviter toute interruption du déploiement.
+
+--- 
