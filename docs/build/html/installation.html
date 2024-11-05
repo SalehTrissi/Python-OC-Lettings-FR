@@ -1,0 +1,194 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instructions sur l’Installation du Projet &mdash; Orange County Lettings 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Guide de Démarrage Rapide" href="quick_start.html" />
+    <link rel="prev" title="Description du Projet" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Orange County Lettings
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Description du Projet</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Instructions sur l’Installation du Projet</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequis-techniques">Prérequis Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#etapes-d-installation">Étapes d’Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Guide de Démarrage Rapide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technologies.html">Technologies et Langages de Programmation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database_models.html">Structure de la Base de Données et des Modèles de Données</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Orange County Lettings</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Instructions sur l’Installation du Projet</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/installation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="instructions-sur-linstallation-du-projet">
+<h1>Instructions sur l’Installation du Projet<a class="headerlink" href="#instructions-sur-linstallation-du-projet" title="Link to this heading"></a></h1>
+<p>Cette section décrit les étapes pour installer <strong>Orange County Lettings</strong> en local et préparer l’environnement de développement.</p>
+<section id="prerequis-techniques">
+<h2>Prérequis Techniques<a class="headerlink" href="#prerequis-techniques" title="Link to this heading"></a></h2>
+<p>Avant de commencer, assurez-vous d’avoir installé les éléments suivants :</p>
+<ul class="simple">
+<li><p><strong>Python</strong> 3.6 ou supérieur : pour exécuter l’application Django.</p></li>
+<li><p><strong>Git</strong> : pour cloner le dépôt du projet.</p></li>
+<li><p><strong>SQLite3</strong> : utilisé comme base de données locale.</p></li>
+<li><p><strong>Docker</strong> (optionnel) : pour exécuter le projet dans un conteneur (utilisé pour le déploiement).</p></li>
+</ul>
+</section>
+<section id="etapes-d-installation">
+<h2>Étapes d’Installation<a class="headerlink" href="#etapes-d-installation" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p><strong>Cloner le Dépôt du Projet</strong></p>
+<p>Utilisez la commande suivante pour cloner le dépôt dans le répertoire de votre choix :</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/SalehTrissi/Python-OC-Lettings-FR.git</span>
+<span class="pre">`</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">cd</span> <span class="pre">Python-OC-Lettings-FR</span>
+<span class="pre">`</span></code></p>
+</li>
+<li><p><strong>Créer un Environnement Virtuel</strong></p>
+<p>Créez un environnement virtuel pour isoler les dépendances du projet :</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">python</span> <span class="pre">-m</span> <span class="pre">venv</span> <span class="pre">env</span>
+<span class="pre">`</span></code></p>
+<p>Pour activer l’environnement virtuel :</p>
+<ul class="simple">
+<li><p>Sur <strong>Windows</strong> :</p></li>
+</ul>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">.\env\Scripts\Activate.ps1</span>
+<span class="pre">`</span></code></p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Sur <strong>macOS/Linux</strong> :</p></li>
+</ul>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">source</span> <span class="pre">env/bin/activate</span>
+<span class="pre">`</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>Installer les Dépendances</strong></p>
+<p>Une fois l’environnement virtuel activé, installez les dépendances nécessaires à partir du fichier <cite>requirements.txt</cite> :</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span>
+<span class="pre">`</span></code></p>
+</li>
+<li><p><strong>Configurer la Base de Données</strong></p>
+<p>L’application utilise SQLite comme base de données par défaut. Appliquez les migrations pour configurer la base de données :</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">migrate</span>
+<span class="pre">`</span></code></p>
+</li>
+<li><p><strong>Créer un Superutilisateur (Optionnel)</strong></p>
+<p>Si vous souhaitez accéder au panneau d’administration, créez un superutilisateur :</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">createsuperuser</span>
+<span class="pre">`</span></code></p>
+</li>
+<li><p><strong>Lancer le Serveur de Développement</strong></p>
+<p>Démarrez le serveur Django pour vérifier que l’installation a réussi :</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">runserver</span>
+<span class="pre">`</span></code></p>
+<p>Rendez-vous ensuite sur (<a class="reference external" href="http://localhost:8000">http://localhost:8000</a>) dans votre navigateur pour voir l’application en action.</p>
+</li>
+</ol>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Assurez-vous d’activer l’environnement virtuel (<cite>env</cite>) chaque fois que vous travaillez sur le projet.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-left" title="Description du Projet" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="quick_start.html" class="btn btn-neutral float-right" title="Guide de Démarrage Rapide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Saleh Trissi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

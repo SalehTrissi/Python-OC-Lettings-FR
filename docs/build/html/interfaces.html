@@ -1,0 +1,184 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interfaces de Programmation &mdash; Orange County Lettings 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Structure de la Base de Données et des Modèles de Données" href="database_models.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Orange County Lettings
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Description du Projet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Instructions sur l’Installation du Projet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Guide de Démarrage Rapide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technologies.html">Technologies et Langages de Programmation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database_models.html">Structure de la Base de Données et des Modèles de Données</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Interfaces de Programmation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#points-d-acces-api">Points d’Accès API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#routes-et-vues-principales">Routes et Vues Principales</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gestion-des-erreurs">Gestion des Erreurs</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Orange County Lettings</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Interfaces de Programmation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/interfaces.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="interfaces-de-programmation">
+<h1>Interfaces de Programmation<a class="headerlink" href="#interfaces-de-programmation" title="Link to this heading"></a></h1>
+<p>Cette section décrit les interfaces de programmation de l’application <strong>Orange County Lettings</strong>.</p>
+<p>Elle inclut les principales routes et vues disponibles pour interagir avec les profils et les annonces de location, ainsi que les messages d’erreur spécifiques.</p>
+<section id="points-d-acces-api">
+<h2>Points d’Accès API<a class="headerlink" href="#points-d-acces-api" title="Link to this heading"></a></h2>
+<p>Actuellement, l’application n’expose pas d’API REST ou d’API JSON pour des intégrations externes. Toutes les interactions avec l’application sont effectuées via des pages web rendues par Django.</p>
+</section>
+<section id="routes-et-vues-principales">
+<h2>Routes et Vues Principales<a class="headerlink" href="#routes-et-vues-principales" title="Link to this heading"></a></h2>
+<p>L’application <strong>Orange County Lettings</strong> est organisée en deux sections principales : <strong>Profiles</strong> et <strong>Lettings</strong>.</p>
+<p>Chaque section a ses propres routes et vues, accessibles via les URL suivantes :</p>
+<p><strong>Profiles:</strong></p>
+<p>Ces vues permettent de gérer les profils des utilisateurs.</p>
+<ul class="simple">
+<li><p><strong>`/profiles/`</strong> : Affiche la liste de tous les profils disponibles.</p>
+<ul>
+<li><p><strong>Vue</strong> : <cite>ProfileListView</cite></p></li>
+<li><p><strong>Description</strong> : Récupère tous les profils et les affiche dans une liste avec des liens vers chaque profil individuel.</p></li>
+</ul>
+</li>
+<li><p><strong>`/profiles/&lt;username&gt;/`</strong> : Affiche les détails d’un profil spécifique.</p>
+<ul>
+<li><p><strong>Vue</strong> : <cite>ProfileDetailView</cite></p></li>
+<li><p><strong>Description</strong> : Affiche les informations détaillées pour un utilisateur spécifique, en utilisant le nom d’utilisateur pour récupérer le profil.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Lettings:</strong></p>
+<p>Ces vues permettent de gérer les locations et les adresses associées.</p>
+<ul class="simple">
+<li><p><strong>`/lettings/`</strong> : Affiche la liste de toutes les annonces de location.</p>
+<ul>
+<li><p><strong>Vue</strong> : <cite>LettingListView</cite></p></li>
+<li><p><strong>Description</strong> : Récupère toutes les annonces de location et les affiche dans une liste avec des liens vers chaque annonce.</p></li>
+</ul>
+</li>
+<li><p><strong>`/lettings/&lt;id&gt;/`</strong> : Affiche les détails d’une annonce de location spécifique.</p>
+<ul>
+<li><p><strong>Vue</strong> : <cite>LettingDetailView</cite></p></li>
+<li><p><strong>Description</strong> : Affiche les informations détaillées pour une annonce de location, identifiée par son identifiant unique.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="gestion-des-erreurs">
+<h2>Gestion des Erreurs<a class="headerlink" href="#gestion-des-erreurs" title="Link to this heading"></a></h2>
+<p>L’application inclut des pages spécifiques pour gérer les erreurs standard.</p>
+<ul class="simple">
+<li><p><strong>404 - Page Not Found</strong></p>
+<ul>
+<li><p><strong>Route</strong> : N/A (automatique)</p></li>
+<li><p><strong>Vue</strong> : <cite>404.html</cite></p></li>
+<li><p><strong>Description</strong> : Affiche un message d’erreur lorsque l’utilisateur essaie d’accéder à une page qui n’existe pas.</p></li>
+</ul>
+</li>
+<li><p><strong>500 - Server Error</strong></p>
+<ul>
+<li><p><strong>Route</strong> : N/A (automatique)</p></li>
+<li><p><strong>Vue</strong> : <cite>500.html</cite></p></li>
+<li><p><strong>Description</strong> : Affiche un message d’erreur lorsqu’une erreur serveur inattendue se produit.</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Cette section des interfaces de programmation donne un aperçu des points d’accès et des vues principales, permettant de naviguer efficacement dans les différentes parties de l’application.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="database_models.html" class="btn btn-neutral float-left" title="Structure de la Base de Données et des Modèles de Données" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Saleh Trissi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,191 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Procédures de Déploiement et de Gestion de l’Application &mdash; Orange County Lettings 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Guide d’Utilisation" href="user_guide.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Orange County Lettings
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Description du Projet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Instructions sur l’Installation du Projet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Guide de Démarrage Rapide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technologies.html">Technologies et Langages de Programmation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database_models.html">Structure de la Base de Données et des Modèles de Données</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interfaces.html">Interfaces de Programmation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">Guide d’Utilisation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Procédures de Déploiement et de Gestion de l’Application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#deploiement-automatise-avec-github-actions">Déploiement Automatisé avec GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gestion-post-deploiement">Gestion Post-Déploiement</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Orange County Lettings</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Procédures de Déploiement et de Gestion de l’Application</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/deployment.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="procedures-de-deploiement-et-de-gestion-de-lapplication">
+<h1>Procédures de Déploiement et de Gestion de l’Application<a class="headerlink" href="#procedures-de-deploiement-et-de-gestion-de-lapplication" title="Link to this heading"></a></h1>
+<p>Cette section décrit le processus de déploiement de l’application <strong>Orange County Lettings</strong> en utilisant un pipeline CI/CD avec GitHub Actions et Render. Le déploiement automatique garantit que chaque modification validée dans le code source est testée, construite, et déployée en production sans intervention manuelle.</p>
+<section id="deploiement-automatise-avec-github-actions">
+<h2>Déploiement Automatisé avec GitHub Actions<a class="headerlink" href="#deploiement-automatise-avec-github-actions" title="Link to this heading"></a></h2>
+<p>Le workflow de déploiement se divise en trois jobs principaux : <cite>build</cite>, <cite>docker</cite>, et <cite>deploy</cite>. Voici un aperçu de chaque étape :</p>
+<p><strong>1. Job `build`:</strong></p>
+<p>Le job <cite>build</cite> vérifie la qualité et la fiabilité du code avant de le préparer pour le déploiement. Il comprend les étapes suivantes :</p>
+<ul class="simple">
+<li><p><strong>Vérification du Code Source</strong> :</p>
+<ul>
+<li><p>Clone le code source depuis GitHub et installe les dépendances nécessaires.</p></li>
+<li><p>Effectue le linting avec <cite>flake8</cite> pour vérifier la qualité du code.</p></li>
+<li><p>Exécute les tests unitaires avec <cite>pytest</cite> et génère un rapport de couverture.</p></li>
+</ul>
+</li>
+<li><p><strong>Génération de la Documentation</strong> :</p>
+<ul>
+<li><p>Utilise Sphinx pour générer la documentation technique du projet en HTML.</p></li>
+<li><p>Les rapports de couverture de test et la documentation sont sauvegardés comme artifacts, permettant leur consultation ultérieure.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>2. Job `docker`:</strong></p>
+<p>Une fois les tests réussis, le job <cite>docker</cite> construit et pousse une image Docker de l’application :</p>
+<ul class="simple">
+<li><p><strong>Configuration Docker</strong> :</p>
+<ul>
+<li><p>Configure Docker Buildx pour la construction multi-plateforme.</p></li>
+<li><p>Se connecte à Docker Hub à l’aide des secrets GitHub <cite>DOCKERHUB_USERNAME</cite> et <cite>DOCKERHUB_TOKEN</cite>.</p></li>
+</ul>
+</li>
+<li><p><strong>Création et Publication de l’Image Docker</strong> :</p>
+<ul>
+<li><p>Extrait les métadonnées (tags et labels) pour l’image Docker.</p></li>
+<li><p>Construit et pousse l’image Docker sur Docker Hub, permettant une utilisation simplifiée dans l’environnement de production.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>3. Job `deploy`:</strong></p>
+<p>Le job <cite>deploy</cite> déclenche le déploiement sur Render dès que l’image Docker est prête :</p>
+<ul class="simple">
+<li><p><strong>Déclenchement du Déploiement</strong> :</p>
+<ul>
+<li><p>Utilise l’URL du webhook de Render (<cite>RENDER_DEPLOY_HOOK_URL</cite>) pour déclencher automatiquement le déploiement de la nouvelle version.</p></li>
+<li><p>Render récupère l’image Docker depuis Docker Hub et redéploie l’application en production.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="gestion-post-deploiement">
+<h2>Gestion Post-Déploiement<a class="headerlink" href="#gestion-post-deploiement" title="Link to this heading"></a></h2>
+<p>Une fois l’application déployée, il est important d’assurer une gestion continue pour garantir la stabilité et la performance de l’application. Voici quelques bonnes pratiques pour la gestion post-déploiement :</p>
+<ul class="simple">
+<li><p><strong>Surveillance des Erreurs avec Sentry</strong> :</p>
+<ul>
+<li><p>Sentry est intégré pour suivre les erreurs et les exceptions en production.</p></li>
+<li><p>Vérifiez régulièrement les rapports de Sentry pour identifier et résoudre les problèmes avant qu’ils n’affectent les utilisateurs.</p></li>
+</ul>
+</li>
+<li><p><strong>Vérification des Logs</strong> :</p>
+<ul>
+<li><p>Consultez les logs de Render et de Docker pour surveiller les performances et identifier les problèmes potentiels.</p></li>
+<li><p>Les logs peuvent aider à diagnostiquer des erreurs ou des problèmes de performance en production.</p></li>
+</ul>
+</li>
+<li><p><strong>Mises à Jour du Code</strong> :</p>
+<ul>
+<li><p>Toute mise à jour du code dans les branches <cite>main</cite> ou <cite>master</cite> déclenche automatiquement le pipeline CI/CD, redéployant ainsi l’application après validation.</p></li>
+<li><p>Avant chaque déploiement, assurez-vous que toutes les étapes CI/CD (tests, linting, etc.) se passent sans erreur.</p></li>
+</ul>
+</li>
+</ul>
+<p>Ce processus de déploiement automatisé garantit un flux de travail efficace, de la validation du code jusqu’au déploiement en production, réduisant les risques d’erreur humaine et assurant une livraison rapide des nouvelles fonctionnalités.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="user_guide.html" class="btn btn-neutral float-left" title="Guide d’Utilisation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Saleh Trissi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
