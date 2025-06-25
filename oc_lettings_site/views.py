@@ -10,6 +10,9 @@ def index(request):
     lettings_list = Letting.objects.all()
     profiles_list = Profile.objects.all()
 
+    # This line is intentionally causing a ZeroDivisionError for testing purposes. Error 500
+    # test_erreur = 1 / 0
+
     context = {'lettings_list': lettings_list, 'profiles_list': profiles_list}
     return render(request, 'index.html', context)
 
