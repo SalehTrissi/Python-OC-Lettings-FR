@@ -2,3 +2,4 @@
 *.pyc
 venv
 oc-lettings-site.sqlite3
+/staticfiles
