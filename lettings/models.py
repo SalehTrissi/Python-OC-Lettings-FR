@@ -17,7 +17,10 @@ class Address(models.Model):
         """
         Provides a string representation of the address.
         """
-        return f'{self.number} {self.street}'
+        return f'{self.number} {self.street}, {self.city}'
+
+    class Meta:
+        verbose_name_plural = "Addresses"
 
 
 class Letting(models.Model):
