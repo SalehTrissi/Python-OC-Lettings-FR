@@ -22,7 +22,7 @@ def test_letting_model():
         address=address
     )
     assert str(letting) == 'Cozy Apartment'
-    assert str(address) == '123 Main St'
+    assert str(address) == '123 Main St, Springfield'
     assert letting.address.city == 'Springfield'
 
 
