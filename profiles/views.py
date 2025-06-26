@@ -1,3 +1,9 @@
+"""
+Defines the views for the profiles application.
+
+This module contains the logic for rendering the profiles index
+and detail pages.
+"""
 from django.shortcuts import render
 from .models import Profile
 

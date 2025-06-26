@@ -1,3 +1,9 @@
+"""
+Defines the data models for the profiles application.
+
+This module contains the Profile model, which is linked to the
+built-in User model.
+"""
 from django.db import models
 from django.contrib.auth.models import User
 

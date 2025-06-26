@@ -1,3 +1,9 @@
+"""
+Defines the data models for the lettings application.
+
+This module contains the Address and Letting models, which represent
+the core data structures for property lettings.
+"""
 from django.db import models
 from django.core.validators import MaxValueValidator, MinLengthValidator
 

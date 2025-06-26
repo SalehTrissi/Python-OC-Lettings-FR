@@ -1,3 +1,9 @@
+"""
+Defines the views for the lettings application.
+
+This module contains the logic for rendering the lettings index
+and detail pages.
+"""
 from django.shortcuts import render
 from .models import Letting
 

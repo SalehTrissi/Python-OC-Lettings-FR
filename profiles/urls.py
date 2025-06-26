@@ -1,3 +1,9 @@
+"""
+URL configuration for the profiles application.
+
+This module defines the URL patterns that map to the views in the
+profiles app, using the app_name 'profiles' as a namespace.
+"""
 from django.urls import path
 from . import views
 
