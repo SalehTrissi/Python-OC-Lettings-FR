@@ -1,3 +1,4 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from lettings.models import Letting
 from profiles.models import Profile
@@ -29,3 +30,11 @@ def handler500(request):
     Custom view for 500 Internal Server Error.
     """
     return render(request, '500.html', status=500)
+
+
+def trigger_error(request: HttpRequest) -> HttpResponse:
+    """
+    Intentionally triggers an error for Sentry testing.
+    """
+    division_by_zero = 1 / 0
+    return HttpResponse(str(division_by_zero))
