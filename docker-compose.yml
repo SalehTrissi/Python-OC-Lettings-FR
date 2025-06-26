@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  web:
+    # Build the image from the Dockerfile in the current directory
+    build: .
+    # Command to run after building the image
+    # It ensures the database is migrated before starting the server
+    command: sh -c "python manage.py migrate && gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:8000"
+    volumes:
+      # Mount the sqlite database file from the host into the container
+      # This ensures that data persists across container restarts.
+      - ./oc-lettings-site.sqlite3:/app/oc-lettings-site.sqlite3
+      # Mount the static files directory to ensure they are accessible
+      - ./staticfiles:/app/staticfiles
+    ports:
+      # Map port 8000 on the host to port 8000 in the container
+      - "8000:8000"
+    env_file:
+      # Load environment variables from a .env file
+      - .env
