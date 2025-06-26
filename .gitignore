@@ -5,3 +5,4 @@ oc-lettings-site.sqlite3
 /staticfiles
 /htmlcov
 .env
+*.sqlite3
