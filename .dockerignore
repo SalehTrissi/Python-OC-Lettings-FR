@@ -17,10 +17,6 @@ env/
 **/__pycache__/
 *.pyc
 
-# # Local database SQLite database
-oc-lettings-site.sqlite3
-*.sqlite3
-
 # Static files
 staticfiles
 
