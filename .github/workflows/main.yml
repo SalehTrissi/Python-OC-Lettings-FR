@@ -42,3 +42,34 @@ jobs:
         run: |
           pytest --cov=. --cov-report=xml
           coverage report --fail-under=80
+
+  # This job builds and pushes the Docker image to Docker Hub
+  containerize:
+    name: Build and Push to Docker Hub
+    # This job depends on the success of the build_and_test job
+    needs: build_and_test
+    # This job only runs for pushes to the master branch
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Logs in to Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          # Uses secrets to securely log in to Docker Hub
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # 3. Builds and pushes the Docker image
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/oc-lettings-fr:${{ github.sha }}
