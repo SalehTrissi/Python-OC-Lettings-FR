@@ -1,17 +1,18 @@
-.. Orange County Lettings documentation master file, created by
-   sphinx-quickstart on Fri Jun 27 17:08:22 2025.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+##################################################
+Documentation Orange County Lettings
+##################################################
 
-Orange County Lettings documentation
-====================================
+Bienvenue sur la documentation technique du projet **Orange County Lettings**.
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
-
+Ce site a pour but de fournir une référence complète pour les développeurs et les administrateurs du système. Vous y trouverez toutes les informations nécessaires pour installer, configurer, utiliser et déployer l'application.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Guide Technique
 
+   introduction
+   technologies
+   installation
+   database
+   deployment
+   user_guide
