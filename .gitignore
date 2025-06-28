@@ -4,3 +4,4 @@ venv
 /staticfiles
 /htmlcov
 .env
+docs/build/
