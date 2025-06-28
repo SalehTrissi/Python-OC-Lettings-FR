@@ -1,6 +1,6 @@
-##########################
+############
 Introduction
-##########################
+############
 
 Bienvenue sur le projet **Orange County Lettings**.
 

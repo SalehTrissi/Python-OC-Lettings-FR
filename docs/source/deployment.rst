@@ -1,6 +1,6 @@
-####################################
+####################
 Déploiement et CI/CD
-####################################
+####################
 
 Ce projet est configuré pour l'Intégration Continue (CI) et le Déploiement Continu (CD) en utilisant GitHub Actions, Docker et Render.
 
@@ -45,6 +45,7 @@ Une fois la configuration initiale terminée, le processus de déploiement est e
 
 1.  Assurez-vous que vos modifications sont sur la branche `master`.
 2.  Poussez vos commits sur GitHub :
+
     .. code-block:: bash
 
         git push origin master

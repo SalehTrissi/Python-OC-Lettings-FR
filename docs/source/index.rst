@@ -1,6 +1,6 @@
-##################################################
+####################################
 Documentation Orange County Lettings
-##################################################
+####################################
 
 Bienvenue sur la documentation technique du projet **Orange County Lettings**.
 
