@@ -1,6 +1,12 @@
 # Résumé
 
+## Orange County Lettings
+
 Site web d'Orange County Lettings
+
+[![Documentation Status](https://readthedocs.org/projects/trissi-mohammad-saleh-python-oc-lettings-fr/badge/?version=latest)](https://trissi-mohammad-saleh-python-oc-lettings-fr.readthedocs.io/fr/latest/?badge=latest)
+
+This is a Django project for managing real estate lettings, refactored from a monolithic architecture to a modular one.
 
 ## Développement local
 
