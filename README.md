@@ -1,133 +1,176 @@
-# Résumé
+# Orange County Lettings
 
-## Orange County Lettings
-
-Site web d'Orange County Lettings
-
+[![CI/CD Pipeline](https://github.com/SalehTrissi/Python-OC-Lettings-FR/actions/workflows/main.yml/badge.svg)](https://github.com/SalehTrissi/Python-OC-Lettings-FR/actions)
 [![Documentation Status](https://readthedocs.org/projects/trissi-mohammad-saleh-python-oc-lettings-fr/badge/?version=latest)](https://trissi-mohammad-saleh-python-oc-lettings-fr.readthedocs.io/fr/latest/?badge=latest)
 
-This is a Django project for managing real estate lettings, refactored from a monolithic architecture to a modular one.
+Ce projet est une application web Django pour la gestion de locations immobilières. Il a fait l'objet d'une refactorisation d'une architecture monolithique vers une structure modulaire, avec l'intégration d'un pipeline CI/CD complet.
 
-## Développement local
+---
 
-### Prérequis
+## Stack Technique
 
-- Compte GitHub avec accès en lecture à ce repository
-- Git CLI
-- SQLite3 CLI
-- Interpréteur Python, version 3.6 ou supérieure
+* **Backend :** Python, Django
+* **Base de Données :** SQLite3
+* **Tests :** Pytest, Coverage.py
+* **Qualité de Code :** Flake8
+* **CI/CD :** GitHub Actions
+* **Conteneurisation :** Docker
+* **Hébergement :** Render
+* **Monitoring :** Sentry
+* **Documentation :** Sphinx, Read the Docs
 
-Dans le reste de la documentation sur le développement local, il est supposé que la commande `python` de votre OS shell exécute l'interpréteur Python ci-dessus (à moins qu'un environnement virtuel ne soit activé).
+---
 
-### macOS / Linux
+## Installation Locale
 
-#### Cloner le repository
+Suivez ces étapes pour configurer et lancer le projet sur votre machine.
 
-- `cd /path/to/put/project/in`
-- `git clone https://github.com/OpenClassrooms-Student-Center/Python-OC-Lettings-FR.git`
+### 1. Prérequis
 
-#### Créer l'environnement virtuel
+* Python (version 3.9 ou supérieure)
+* Git
 
-- `cd /path/to/Python-OC-Lettings-FR`
-- `python -m venv venv`
-- `apt-get install python3-venv` (Si l'étape précédente comporte des erreurs avec un paquet non trouvé sur Ubuntu)
-- Activer l'environnement `source venv/bin/activate`
-- Confirmer que la commande `python` exécute l'interpréteur Python dans l'environnement virtuel
-`which python`
-- Confirmer que la version de l'interpréteur Python est la version 3.6 ou supérieure `python --version`
-- Confirmer que la commande `pip` exécute l'exécutable pip dans l'environnement virtuel, `which pip`
-- Pour désactiver l'environnement, `deactivate`
+### 2. Guide d'Installation
 
-#### Exécuter le site
-
-- `cd /path/to/Python-OC-Lettings-FR`
-- `source venv/bin/activate`
-- `pip install --requirement requirements.txt`
-- `python manage.py runserver`
-- Aller sur `http://localhost:8000` dans un navigateur.
-- Confirmer que le site fonctionne et qu'il est possible de naviguer (vous devriez voir plusieurs profils et locations).
-
-#### Linting
-
-- `cd /path/to/Python-OC-Lettings-FR`
-- `source venv/bin/activate`
-- `flake8`
-
-#### Tests unitaires
-
-- `cd /path/to/Python-OC-Lettings-FR`
-- `source venv/bin/activate`
-- `pytest`
-
-#### Base de données
-
-- `cd /path/to/Python-OC-Lettings-FR`
-- Ouvrir une session shell `sqlite3`
-- Se connecter à la base de données `.open oc-lettings-site.sqlite3`
-- Afficher les tables dans la base de données `.tables`
-- Afficher les colonnes dans le tableau des profils, `pragma table_info(Python-OC-Lettings-FR_profile);`
-- Lancer une requête sur la table des profils, `select user_id, favorite_city from
-  Python-OC-Lettings-FR_profile where favorite_city like 'B%';`
-- `.quit` pour quitter
-
-#### Panel d'administration
-
-- Aller sur `http://localhost:8000/admin`
-- Connectez-vous avec l'utilisateur `admin`, mot de passe `Abc1234!`
-
-### Windows
-
-Utilisation de PowerShell, comme ci-dessus sauf :
-
-- Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1`
-- Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`
-
-## Déploiement
-
-Ce projet est configuré pour l'Intégration Continue (CI) et le Déploiement Continu (CD) en utilisant GitHub Actions, Docker et Render.
-
-### Résumé du fonctionnement
-
-Le pipeline de déploiement est automatisé et suit les étapes suivantes :
-
-1. **Déclencheur** : Un `push` vers la branche `master` déclenche automatiquement le workflow GitHub Actions.
-2. **Compilation & Tests (CI)** : Le workflow exécute d'abord un job "Build and Test" qui installe les dépendances, lance le linter (`flake8`), et exécute la suite de tests complète (`pytest`). Il vérifie également que la couverture de test est supérieure à 80 %. Ce job doit réussir pour que le pipeline puisse continuer.
-3. **Containerize  (CI)** : Si les tests réussissent, un job "Containerize" construit une image Docker de l'application. Cette image est ensuite taguée avec le SHA unique du commit Git et poussée sur Docker Hub.
-4. **Déploiement (CD)** : Si l'image est poussée avec succès, un dernier job "Deploy" est déclenché. Ce job appelle un "Deploy Hook" spécifique fourni par Render, qui ordonne à Render de récupérer la dernière version de la branche `master` et de redéployer le service avec le nouveau code.
-
-Les modifications poussées sur toute autre branche ne déclencheront que le job "Build & Test", garantissant la qualité du code sans le déployer en production.
-
-### Configuration Requise
-
-Pour exécuter ce pipeline de déploiement sur votre propre version du projet (fork), vous devrez configurer les éléments suivants :
-
-#### 1. Secrets du dépôt sur GitHub
-
-Naviguez vers les `Settings` > `Secrets and variables` > `Actions` de votre dépôt GitHub et ajoutez les secrets suivants :
-
-- `DOCKERHUB_USERNAME` : Votre nom d'utilisateur Docker Hub.
-- `DOCKERHUB_TOKEN` : Un token d'accès généré depuis votre compte Docker Hub avec les permissions `Read, Write, Delete`.
-- `RENDER_DEPLOY_HOOK_URL` : L'URL du "Deploy Hook" fournie par votre service web sur Render (disponible dans l'onglet `Settings` du service).
-
-#### 2. Variables d'environnement sur Render
-
-Sur le tableau de bord Render, pour votre service web, naviguez vers l'onglet `Environment` et ajoutez les variables suivantes :
-
-- `DJANGO_SECRET_KEY` : Une nouvelle clé secrète générée aléatoirement pour l'environnement de production.
-- `SENTRY_DSN` : La clé DSN de votre projet Sentry.
-- `DEBUG` : À définir sur `False`.
-- `ALLOWED_HOSTS` : L'URL de votre application Render (par exemple, `votre-nom-d-app.onrender.com`).
-
-### Étapes du Déploiement
-
-Une fois la configuration initiale terminée, le processus de déploiement est entièrement automatisé.
-
-1. **Commit et Push** : Faites vos modifications dans le code de l'application.
-2. **Fusionner sur Master** : Assurez-vous que vos modifications sont sur la branche `master`.
-3. **Pousser sur GitHub** :
+1. **Cloner le Dépôt**
 
     ```bash
-    git push origin master
+    git clone https://github.com/SalehTrissi/Python-OC-Lettings-FR.git
     ```
 
-4. **Suivre le Pipeline** : Vous pouvez observer la progression du déploiement dans l'onglet "Actions" de votre dépôt GitHub. Une fois que tous les jobs sont réussis, Render démarrera automatiquement le nouveau déploiement, qui peut être suivi depuis l'onglet "Events" de votre tableau de bord Render.
+2. **Naviguer dans le Dossier du Projet**
+    Toutes les commandes suivantes doivent être exécutées depuis la racine du projet.
+
+    ```bash
+    cd Python-OC-Lettings-FR
+    ```
+
+3. **Créer et Activer l'Environnement Virtuel**
+
+    ```bash
+    python -m venv env
+    ```
+
+    * **macOS/Linux :** `source env/bin/activate`
+    * **Windows (PowerShell) :** `.\env\Scripts\activate`
+
+4. **Installer les Dépendances**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+5. **Configurer les Variables d'Environnement (pour Sentry)**
+    Pour le monitoring des erreurs, créez un fichier `.env` à la racine du projet et ajoutez uniquement votre clé Sentry :
+
+    ```env
+    # Clé DSN pour le monitoring avec Sentry
+    SENTRY_DSN=https://votre_cle_sentry@...
+    ```
+
+    *Note : Les variables `SECRET_KEY` et `DEBUG` sont gérées directement dans le fichier `oc_lettings_site/settings.py` pour ce projet.*
+
+6. **Initialiser la Base de Données**
+
+    ```bash
+    python manage.py migrate
+    ```
+
+---
+
+## Utilisation Locale
+
+### Lancer le Serveur
+
+* **Mode Développement (Recommandé)** :
+    Ouvrez `oc_lettings_site/settings.py`, assurez-vous que `DEBUG = True` et lancez :
+
+    ```bash
+    python manage.py runserver
+    ```
+
+* **Mode Production Locale** (pour tester les pages d'erreur 404/500) :
+    Dans `oc_lettings_site/settings.py`, passez `DEBUG` à `False`, puis exécutez dans le terminal :
+
+    ```bash
+    python manage.py collectstatic
+    python manage.py runserver
+    ```
+
+### Lancer le Serveur avec Docker
+
+Cette méthode permet de lancer l'application dans un environnement conteneurisé, identique à celui utilisé par le pipeline CI/CD.
+
+1. **Prérequis :** Assurez-vous que Docker Desktop est installé et en cours d'exécution.
+2. **Construire l'image Docker :**
+    Cette commande lit le `Dockerfile` et construit l'image de votre application.
+
+    ```bash
+    docker-compose build
+    ```
+
+3. **Démarrer le conteneur :**
+    Cette commande démarre l'application à partir de l'image construite. Vous verrez les logs du serveur s'afficher dans votre terminal.
+
+    ```bash
+    docker-compose up
+    ```
+
+Pour arrêter le service, appuyez sur `CTRL + C`. Pour arrêter et supprimer le conteneur, utilisez `docker-compose down`.
+
+---
+
+Le site est accessible à l'adresse [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
+
+### Outils de Qualité et Tests
+
+* **Lancer les tests et voir la couverture :**
+
+    ```bash
+    pytest
+    ```
+
+* **Vérifier la qualité du code (Linting) :**
+
+    ```bash
+    flake8
+    ```
+
+### Administration
+
+* **Accéder au panel admin :** [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)
+
+* **Compte par défaut (pour évaluation)** :
+    Pour faciliter l'évaluation, un compte administrateur est pré-configuré avec la base de données initiale.
+
+  * **Utilisateur :** `admin`
+  * **Mot de passe :** `Abc1234!`
+
+* **Créer un nouvel administrateur** :
+    Pour le développement, il est recommandé de créer votre propre compte.
+
+    ```bash
+    python manage.py createsuperuser
+    ```
+
+---
+
+## Déploiement Automatisé (CI/CD)
+
+### Vue d'ensemble du Pipeline
+
+Le déploiement est entièrement automatisé via GitHub Actions. Tout `push` sur la branche `master` déclenche le workflow suivant :
+
+1. **Build & Test :** Installe les dépendances, exécute `flake8` et `pytest`.
+2. **Containerize :** Si les tests passent, une image Docker est construite et poussée sur Docker Hub.
+3. **Deploy :** Si l'image est publiée, un "deploy hook" est appelé pour mettre à jour l'application sur Render.
+
+### Configuration pour un Fork
+
+Pour faire fonctionner le pipeline sur votre propre fork, configurez les secrets suivants dans les `Settings > Secrets and variables > Actions` de votre dépôt GitHub :
+
+* `DOCKERHUB_USERNAME` : Votre nom d'utilisateur Docker Hub.
+* `DOCKERHUB_TOKEN` : Un token d'accès Docker Hub.
+* `RENDER_DEPLOY_HOOK_URL` : L'URL du "deploy hook" de votre service Render.
+
+Configurez également les variables d'environnement (`SECRET_KEY`, `SENTRY_DSN`, `DEBUG=False`) directement sur votre service Render pour la production.
