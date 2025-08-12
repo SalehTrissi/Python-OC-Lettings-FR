@@ -23,4 +23,13 @@ EXPOSE 8000
 # Command to run the application using gunicorn
 # We use gunicorn as it is a production-ready WSGI server
 # The command runs migrations first and then starts the server.
-CMD ["sh", "-c", "ls -la && python manage.py migrate && python manage.py collectstatic --no-input && gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:8000"]
+# CMD ["sh", "-c", "ls -la && python manage.py migrate && python manage.py collectstatic --no-input && gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:8000"]
+
+# Copy the startup script into the container
+COPY entrypoint.sh /app/entrypoint.sh
+
+# Make the script executable
+RUN chmod +x /app/entrypoint.sh
+
+# Set the script as the startup command
+ENTRYPOINT ["/app/entrypoint.sh"]
