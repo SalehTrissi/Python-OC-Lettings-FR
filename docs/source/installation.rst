@@ -20,53 +20,60 @@ Prérequis
       git clone https://github.com/SalehTrissi/Python-OC-Lettings-FR.git
       cd Python-OC-Lettings-FR
 
-2. **Créez un environnement virtuel**
-   Il est fortement recommandé d'utiliser un environnement virtuel pour isoler les dépendances du projet.
+2. **Créez et activez l'environnement virtuel**
+   Il est fortement recommandé d'utiliser un environnement virtuel.
 
    .. code-block:: bash
 
       python -m venv venv
-      source venv/bin/activate  # Sur Windows: venv\Scripts\activate
+
+   * **Sur macOS/Linux :** ``source venv/bin/activate``
+   * **Sur Windows (PowerShell) :** ``.\venv\Scripts\Activate.ps1``
+
+   .. note::
+      Si vous rencontrez une erreur de sécurité sur Windows, ouvrez PowerShell en tant qu'administrateur et exécutez la commande ``Set-ExecutionPolicy RemoteSigned``.
 
 3. **Installez les dépendances**
-   Installez tous les paquets nécessaires listés dans le fichier `requirements.txt`.
 
    .. code-block:: bash
 
       pip install -r requirements.txt
 
 4. **Appliquez les migrations**
-   Cette commande met en place la base de données en utilisant le fichier `oc-lettings-site.sqlite3` fourni.
 
    .. code-block:: bash
 
       python manage.py migrate
 
-5. **Lancez le serveur de développement**
-   Votre projet est maintenant prêt ! Lancez le serveur local.
+Lancer le Serveur
+=================
 
-   .. code-block:: bash
+* **Mode Développement (Recommandé)**
+  Ouvrez le fichier ``oc_lettings_site/settings.py``, assurez-vous que ``DEBUG = True``, puis lancez :
 
-      python manage.py runserver
+  .. code-block:: bash
 
-   Vous pouvez maintenant accéder au site à l'adresse http://127.0.0.1:8000.
+     python manage.py runserver
 
+* **Mode Production Locale**
+  Ce mode est utile pour tester les pages d'erreur personnalisées. Dans ``settings.py``, passez ``DEBUG`` à ``False``, puis exécutez :
+
+  .. code-block:: bash
+
+     python manage.py collectstatic --noinput
+     python manage.py runserver
+
+Le site est maintenant accessible à l'adresse http://127.0.0.1:8000.
 
 Accès à l'Interface d'Administration
 ====================================
-
 L'interface d'administration est disponible à l'adresse http://127.0.0.1:8000/admin.
 
-Pour la base de données fournie avec le projet, vous pouvez utiliser les identifiants suivants :
+* **Utilisateur par défaut :** ``admin``
+* **Mot de passe :** ``Abc1234!``
 
-* **Nom d'utilisateur** : `admin`
-* **Mot de passe** : `Abc1234!`
+Pour créer votre propre administrateur, utilisez la commande :
 
-.. warning::
-   Ces identifiants sont destinés **uniquement au développement local**. Ne les utilisez jamais dans un environnement de production.
+   .. code-block:: bash
 
-Si vous démarrez avec une base de données vide, vous devrez créer votre propre superutilisateur avec la commande suivante :
-
-.. code-block:: bash
-
-   python manage.py createsuperuser
+      python manage.py createsuperuser
