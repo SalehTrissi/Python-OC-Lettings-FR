@@ -15,4 +15,4 @@ python manage.py loaddata initial_data.json
 
 # Start the Gunicorn server
 echo "Starting Gunicorn server..."
-gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:$PORT
+gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:8000
